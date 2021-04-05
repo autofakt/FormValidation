@@ -17,7 +17,7 @@
     <label>Password:</label><br>
     <input type="password" id="password"><label id="password-error"></label><br><br>
     <label>SID:</label><br>
-    <input type="text" id="sid" ><label id="sid-error">error goes here</label><br><br>
+    <input type="text" id="sid"><label id="sid-error">error goes here</label><br><br>
     <label for="message">Message:</label><br>
     <textarea type="text" id="message" name="message" rows="12" cols="30"></textarea><label id="message-error" for="message">error goes here</label><br>
     Number of words: <span id="word-count">0</span>
@@ -66,7 +66,7 @@
       var letters = /^(?!\s*$)[A-Za-z]+$/;
       if (!input.match(letters)) {
         userNameError.innerText = "Please input alphabet characters only with no whitespace";
-      return false;
+        return false;
       } else {
         userNameError.innerText = "OK";
         return true;
@@ -100,28 +100,28 @@
       }
     }
 
-    function sidValid(input){
+    function sidValid(input) {
       var nums = /^(?!\s*$)[0-9]*$/i;
       if (input.match(nums)) {
-        if(input.length==9){
+        if (input.length == 9) {
           sidError.innerText = "OK";
           return true;
-        } else{
+        } else {
           sidError.innerText = "Must be 9 digits";
           return false;
         }
-    }else{
-      sidError.innerText = "Must be 9 digits and no characters";
-      return false;
+      } else {
+        sidError.innerText = "Must be 9 digits and no characters";
+        return false;
+      }
     }
-}
 
     function SubmitButtonClicked() {
       var userBool = userNameValid(userName.value);
       var passBool = passwordValid(password.value);
       var sidBool = sidValid(sid.value);
 
-      if(userBool && passBool && sidBool){
+      if (userBool && passBool && sidBool) {
         document.body.style.backgroundColor = "white";
       } else {
         document.body.style.backgroundColor = "pink";
