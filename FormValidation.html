@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Lab 1</title>
+  <meta charset="utf-8">
+
+</head>
+
+<body>
+
+  <h1>Lab 1</h1>
+
+  <form method="get" action="#">
+    <label>Username</label><br>
+    <input type="text" id="username"><label id="username-error"></label><br><br>
+    <label>Password:</label><br>
+    <input type="password" id="password"><label id="password-error"></label><br><br>
+    <label for="sid">SID:</label><br>
+    <input type="text" id="sid" name="sid"><label id="sid-error" for="sid">error goes here</label><br><br>
+    <label for="message">Message:</label><br>
+    <textarea type="text" id="message" name="message" rows="12" cols="30"></textarea><label id="message-error" for="message">error goes here</label><br>
+    Number of words: <span id="word-count">0</span>
+    <br><br>
+
+    <input type="submit" value="Submit" id="button">
+  </form>
+  <script>
+    var userName;
+    var userNameError;
+
+    var password;
+    var passwordError;
+
+    var sid;
+    var sidError;
+
+    var message;
+    var messageError;
+    var wordCount;
+
+    var submitButton;
+
+    window.addEventListener("load", Init);
+
+    function Init() {
+      userName = document.getElementById("username");
+
+      userNameError = document.getElementById("username-error");
+
+      password = document.getElementById("password");
+      passwordError = document.getElementById("password-error");
+
+      sid = document.getElementById("sid");
+      sidError = document.getElementById("sid-error");
+
+      message = document.getElementById("message");
+      messageError = document.getElementById("message-error");
+      wordCount = document.getElementById("word-count");
+
+      submitButton = document.getElementById("button");
+      submitButton.addEventListener("click", SubmitButtonClicked, false);
+    }
+
+    function userNameValid(input) {
+      var letters = /^(?!\s*$)[A-Za-z]+$/;
+      if (!input.match(letters)) {
+        userNameError.innerText = "Please input alphabet characters only with no whitespace";
+      return false;
+      } else {
+        userNameError.innerText = "OK";
+        return true;
+      }
+    }
+
+    function passwordValid(input) {
+      var alphaNum = /^(?!\s*$)[A-Za-z0-9]*$/i;
+      if (input.match(alphaNum)) {
+        var hasNumber = /\d/;
+        if (hasNumber.test(input)) {
+          if (input.toUpperCase() != input) {
+            if (input.toLowerCase() != input) {
+              passwordError.innerText = "OK";
+              return true;
+            } else {
+              passwordError.innerText = "Please add at least one upper case letter.";
+              return false;
+            }
+          } else {
+            passwordError.innerText = "Please add at least one lower case letter.";
+            return false;
+          }
+        } else {
+          passwordError.innerText = "Please add at least one number.";
+          return false;
+        }
+      } else {
+        passwordError.innerText = "Need at least one uppercase, lowercase, and number.";
+        return false;
+      }
+    }
+
+    function SubmitButtonClicked() {
+      var userBool = userNameValid(userName.value);
+      var passBool = passwordValid(password.value);
+      if(userBool && passBool){
+        document.body.style.backgroundColor = "white";
+      } else {
+        document.body.style.backgroundColor = "pink";
+      }
+    }
+  </script>
+</body>
+
+</html>
